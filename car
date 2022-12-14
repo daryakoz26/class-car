@@ -1,0 +1,89 @@
+using System;
+ 
+namespace Cars
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Trukt t1 = new Trukt();
+            Trukt t2 = new Trukt();
+            Trukt t3 = new Trukt();
+            t1.Marc = "Audi";
+            t1.Color = Car.Colors.Black;
+            t1.Cost = 700000;
+            Console.WriteLine(t1.ToString());
+ 
+ 
+            t2.Marc = "BMW";
+            t2.Color = Car.Colors.White;
+            t2.Cost = 1000000;
+            Console.WriteLine("\n" + t2.ToString());
+            
+
+            t3.Marc = "Mersedes";
+            t3.Color = Car.Colors.Yellow;
+            t3.Cost = 900000;
+            Console.WriteLine("\n" + t3.ToString());
+            Console.WriteLine();
+ 
+            Console.WriteLine("Итоговая комплектация:\n");
+ 
+            t1.SetColor(Car.Colors.Yellow);
+            t1.Sum(20000);
+            Console.WriteLine("\n" + t1.ToString());
+ 
+ 
+            t2.SetColor(Car.Colors.Black);
+            Console.WriteLine("\n" + t2.ToString());
+            
+            
+            t3.SetColor(Car.Colors.White);
+            Console.WriteLine("\n" + t3.ToString());
+            Console.ReadKey();
+        }
+    }
+ 
+    class Car
+    {
+        public enum Colors { White, Black, Yellow }
+ 
+        public string Marc { get; set; }
+        public Colors Color { get; set; }
+        public int Cost { get; set; }
+ 
+        public Car(string marc, Colors color, int cost)
+        {
+            Marc = marc;
+            Color = color;
+            Cost = cost;
+        }
+ 
+        public Car()
+        {
+        }
+ 
+        public override string ToString()
+        {
+            return string.Format("Марка:{0} \nЦвет:{1} \nЦена:{2}", Marc, Color, Cost);
+        }
+    }
+ 
+    class Trukt : Car
+    {
+        public void Sum(int money)//+деньги за доп. комплектацию
+        {
+            this.Cost += money;
+        }
+ 
+        public void SetColor(Colors color)
+        {
+                switch ((int)color)
+                {
+                    case 0: this.Color = Car.Colors.White; break;
+                    case 1: this.Color = Car.Colors.Black; ; break;
+                    case 2: this.Color = Car.Colors.Yellow; ; break;
+                }
+        }
+    }
+}
